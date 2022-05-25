@@ -1,32 +1,91 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/starships">STARSHIPS</router-link>
-    </nav>
-    <router-view/>
+    <div class="header-wrapper">
+      <div class="social"></div>
+      <div class="logo-wrapper">
+        <img class="logo" src="./assets/starwars_logo.png" alt="">
+      </div>
+      <div class="username-info" v-if="$store.state.userObject">
+        <h4>You are logged in as: {{$store.state.userObject.username}}</h4>
+      </div>
+      <div class="nav-login" v-else>
+        <a @click="$store.commit('openModal', 'showLogin')" >LOGIN</a> 
+        <span> / </span>
+        <a @click="$store.commit('openModal', 'showRegister')">REGISTER</a>
+      </div>
+    </div>
+    <br>
+    <Navigation/>
+    <router-view> </router-view>
+
+        <LoginForm 
+        v-if="$store.state.modal==='showLogin'"
+        @onClose="$store.commit('closeModal')"
+        />
+        <RegisterForm
+        v-if="$store.state.modal==='showRegister'"
+        @onClose="$store.commit('closeModal')"
+        />
+
   </div>
 </template>
+
+<script>
+import Navigation from "./components/Navigation.vue"
+import LoginForm from "./components/LoginForm.vue"
+import RegisterForm from "./components/RegisterForm.vue"
+export default {
+  name: 'App',
+  components:{
+    Navigation,
+    LoginForm,
+    RegisterForm,
+  },
+  
+}
+</script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  height: min 100vh;
+}
+body{
+  background-image: url("./assets/backgrounds-stars.jpeg");
+  }
+.logo{
+  width:200px;
+  height:auto;
+}
+h3 {
+  margin: 40px 0 0;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+a:hover{
+  color:white;
+} 
+.header-wrapper{
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.social, .logo-wrapper, .nav-login{
+  flex-basis:20%;
+}
+.username-info{
+  display: flex;
+  justify-content: center;
+  color:white;
+  background-color:black;
+  width:200px;
+}
+.nav-login {
+  color:  white;
+  cursor: pointer;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>

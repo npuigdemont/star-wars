@@ -1,40 +1,44 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/HomeView'
+import Starships from '../views/Starships'
+import StarshipFile from '../components/StarshipFile'
+import store from '../store'
+
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView,
-    meta: {
-      title: 'Home'
-    }
-  },
-  {
-    path: '/starships',
-    name: 'starships',
-    meta: {
-      title: 'starships'
+    {
+      path: '/',
+      name: 'Home',
+      component: HomeView
     },
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    {
+      path: '/starships',
+      name: 'Starships',
+      component:Starships
+    },
+    {
+      path: '/starshipfile',
+      name: 'StarshipFile',
+      component: () => import(/* webpackChunkName: "starshipFile" */ '../components/StarshipFile.vue')
+    },
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
-})
-router.beforeEach((to, from, next)=>{
-  document.title =`${to.meta.title} | Star Wars`;
-  next();
+  ]
 
-});
+  const router = new VueRouter({
+    routes
+  })
 
-export default router
+  router.beforeEach((to, from, next) => {
+    
+    if (to.name !== 'Home'&& !store.state.userObject){
+      next({ name: 'Home' }) 
+      store.commit('openModal', "showRegister")
+    } 
+    else next()
+
+  })
+  
+  export default router
