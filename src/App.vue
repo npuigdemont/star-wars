@@ -87,5 +87,9 @@ a:hover{
   color:  white;
   cursor: pointer;
 }
+ul {
+  text-decoration: none;
+  list-style: none;
+}
 
 </style>

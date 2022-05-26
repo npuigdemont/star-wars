@@ -31,7 +31,7 @@ const routes = [
     routes
   })
 
-  router.beforeEach((to, from, next) => {
+  /*router.beforeEach((to, from, next) => {
     
     if (to.name !== 'Home'&& !store.state.userObject){
       next({ name: 'Home' }) 
@@ -39,6 +39,6 @@ const routes = [
     } 
     else next()
 
-  })
+  })*/
   
   export default router

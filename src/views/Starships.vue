@@ -25,9 +25,10 @@ export default {
 .starshipList{
     padding:0;
     list-style: none;
+    text-decoration: none;
 }
 .starship{
-    background-color: #494847;
+    background-color: #202020;
     padding:10px;
     margin:10px;
     cursor:pointer;
@@ -53,4 +54,5 @@ button:hover{
   border-color:grey;
   color:white;
 }
+
 </style>

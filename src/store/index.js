@@ -30,7 +30,7 @@ export default new Vuex.Store({
       resetStarshipList(state){
         state.starships = []
         state.nextPageUrl= "https://swapi.dev/api/starships"
-        console.log(state.starships)
+       // console.log(state.starships)
       },
       closeModal(state){
         state.modal = null
@@ -48,7 +48,7 @@ export default new Vuex.Store({
         
         state.pilots = {...state.pilots} 
         state.pilots[pilot.url] = pilot
-        console.log(pilot, state.pilots)
+       // console.log(pilot, state.pilots)
       }
       
 
@@ -82,9 +82,9 @@ export default new Vuex.Store({
         })
       },
       signIn(context, [username, password]){
-        const key= username
-        const userJSON= (window.localStorage.getItem(key)) 
-        const userObject = JSON.parse(userJSON)
+        const key= username;
+        const userJSON= (window.localStorage.getItem(key)) ;
+        const userObject = JSON.parse(userJSON);
   
         if(userJSON !== null && password == userObject.password){
           alert("you signed in")
@@ -92,20 +92,20 @@ export default new Vuex.Store({
           context.commit ('closeModal')
   
         }else{
-          alert("unknown username or wrong password")
+          alert("unknown username or wrong password");
         }
       },
       createAccount(context, newUser){
-        const key = newUser.username
-        const userExists = (window.localStorage.getItem(key) !==null) 
-        
+        const key = newUser.username;
+        const userExists = (window.localStorage.getItem(key) !==null) ;
+        console.log(newUser);
         if(userExists){
-          alert("user already exists")
+          alert("user already exists");
   
         }else{
-    
-          window.localStorage.setItem(key, JSON.stringify(newUser))
-          console.log(key)
+          console.log(newUser);
+          window.localStorage.setItem(key, JSON.stringify(newUser));
+          
           context.commit('openModal', 'showLogin' )
         }
       }

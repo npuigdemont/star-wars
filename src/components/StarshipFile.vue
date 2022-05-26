@@ -1,7 +1,7 @@
 <template>
   <div class="starshipCard">
       <img class="m-3" :src="`https://starwars-visualguide.com/assets/img/starships/${$route.query.id}.jpg`" alt="">
-      <h1>Starships name: {{$store.getters.getStarshipFile.name}}</h1>
+      <h1 class="text-uppercase"> {{$store.getters.getStarshipFile.name}}</h1>
   <ul>
             <li><b>Model:</b> {{$store.getters.getStarshipFile.model}}</li>
             <li><b>Manufacturer:</b> {{$store.getters.getStarshipFile.manufacturer}}</li>
